@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#70B7FD"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-space.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-space.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-space.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab-space.svg" color="#70B7FD">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.13.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Go的问题 itoa是个什么就是一个常量计数器, 只能用于const中. 我觉得没啥用, 一点通用性都没有, 作用也非常有限. 忘记它都可以, java中有这样的东西吗? 好像是有的, 叫什么生成器., 但这个有些用, 也具有通用性.  int和uint有什么用, 已经有int8, int16, int32, int64和uint, uint8, uint16, uint32, uint64int">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go的问题">
+<meta property="og:url" content="http://example.com/2024/06/10/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Go/%E9%97%AE%E9%A2%98/Go%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="space">
+<meta property="og:description" content="Go的问题 itoa是个什么就是一个常量计数器, 只能用于const中. 我觉得没啥用, 一点通用性都没有, 作用也非常有限. 忘记它都可以, java中有这样的东西吗? 好像是有的, 叫什么生成器., 但这个有些用, 也具有通用性.  int和uint有什么用, 已经有int8, int16, int32, int64和uint, uint8, uint16, uint32, uint64int">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-06-10T13:34:44.000Z">
+<meta property="article:modified_time" content="2024-06-10T13:40:56.285Z">
+<meta property="article:author" content="霄剑">
+<meta property="article:tag" content="Go">
+<meta property="article:tag" content="问题">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2024/06/10/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Go/%E9%97%AE%E9%A2%98/Go%E7%9A%84%E9%97%AE%E9%A2%98/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/06/10/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Go/%E9%97%AE%E9%A2%98/Go%E7%9A%84%E9%97%AE%E9%A2%98/","path":"2024/06/10/编程语言/Go/问题/Go的问题/","title":"Go的问题"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Go的问题 | space</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<script async src="/live2d/autoload.js"> </script>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">space</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">14</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">13</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">32</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Go%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">Go的问题</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="霄剑"
+      src="/images/avatar.svg">
+  <p class="site-author-name" itemprop="name">霄剑</p>
+  <div class="site-description" itemprop="description">醉后不知天在水,满船清梦压星河</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/55OX5XO55" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;55OX5XO55" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/2606863445@qq.com" title="E-Mail → 2606863445@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/10/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Go/%E9%97%AE%E9%A2%98/Go%E7%9A%84%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.svg">
+      <meta itemprop="name" content="霄剑">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="space">
+      <meta itemprop="description" content="醉后不知天在水,满船清梦压星河">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Go的问题 | space">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Go的问题
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-06-10 21:34:44 / 修改时间：21:40:56" itemprop="dateCreated datePublished" datetime="2024-06-10T21:34:44+08:00">2024-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">编程语言</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Go/" itemprop="url" rel="index"><span itemprop="name">Go</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>25 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Go的问题"><a href="#Go的问题" class="headerlink" title="Go的问题"></a>Go的问题</h1><ol>
+<li><code>itoa</code>是个什么<br>就是一个常量计数器, 只能用于<code>const</code>中. 我觉得没啥用, 一点通用性都没有, 作用也非常有限. 忘记它都可以, <code>java</code>中有这样的东西吗? 好像是有的, 叫什么生成器., 但这个有些用, 也具有通用性. </li>
+<li><code>int</code>和<code>uint</code>有什么用, 已经有<code>int8</code>, <code>int16</code>, <code>int32</code>, <code>int64</code>和<code>uint</code>, <code>uint8</code>, <code>uint16</code>, <code>uint32</code>, <code>uint64</code><br><code>int</code>和<code>uint</code>应该是在程序内部自己使用的, 如果要调用外部的接口, 也就是别人包里面的东西, 肯定只能用确定位数的数字, 否则大小有可能不匹配, 会吗. <code>go</code>编译的时候应该也会把别人包里面的东西一起编译吧, 会吗? 那<code>go</code>没哟编译好的库吗? 所有的东西都要自己编译吗? <code>java</code>是怎么引入<code>jar</code>包的呢? <code>go</code>语言的包管理是真的乱, 下载的包的位置, 找包的路径, <code>go get</code>这个东西又一直在变, <code>go install</code>又是什么东西, 下载了包为什么还要自己编译, 真是吐了. <code>java</code>如何使用<code>jar</code>包呢. <code>java</code>和<code>go</code>对于编译成包, 和使用包都有些复杂, 复杂吗? 学习这些语言时, 好像都不关心这些东西? 真的不重要吗?</li>
+<li>“如果是在函数外部定义, 那么将在当前包的所有文件中都可以访问”. 包是类或者类的集合, 包中还可以包含包, 包用于组织类或者结构. </li>
+<li><code>go</code>语言中有声明和定义和区别吗? <code>java</code>有吗? <code>go</code>区分函数的声明和定义吗? 现在<code>go</code>函数的定义不需要出现使用之前</li>
+<li><code>go</code>语言不存在未初始化的值, 无论是包级别的变量, 还是函数内部的, 都会被赋零值. 那怎么区分不存在和零值呢? 例如输入空字符串和不输入字符串</li>
+<li>短变量声明只能用于函数内部吗? 为什么不能用于包级别呢? 有没有什么区别?</li>
+<li>当短变量声明对某个变量进行赋值时, 这个变量在函数内还是函数外, 会决定这个是赋值, 还是声明, 这可能会导致不熟悉<code>go</code>语言的人写出<code>bug</code>. <code>java</code>没有这种赋值和定义同时进行的操作, 只能同时定义, <code>int a = 10, b = 20;</code></li>
+<li>为什么<code>go</code>的可运行程序的第一个非注释行必须是<code>package main</code>? <code>go</code>语言中<code>package</code>与文件路径无关, 那它有什么用呢?</li>
+<li><code>go</code>语言允许返回局部变量的地址, 且这个地址是有效的, 不会被覆盖, 这个跟<code>c</code>语言不同, <code>c</code>语言地址里面的值是会被修改, 导致不可用, 这个更像<code>java</code>中的返回函数中<code>new</code> 的对象. 看来<code>go</code>跟<code>c</code>的实现存在明显区别</li>
+<li><code>java</code>没有自带的命令行参数解析库, 需要自己去下载<code>jar</code>包, 这里可以借助<code>maven</code></li>
+<li>如果类型的大小为0, 例如<code>struct&#123;&#125;</code>和<code>[0]int</code>, 可能会有相同的地址, 同时<code>go</code>语言对于大小为0的结构的处理还存在问题, 那为什么不修呢</li>
+<li><code>new</code>只是一个预定义的函数, 不是一个关键字, 我们因此可以将<code>new</code>名字重新定义为别的类型. 这个该说是<code>go</code>语言的有点呢, 还是确定呢? 我认为还是缺点更大一些, 反正都有别的关键字了, 多这一个也不多啊. 也可以认为<code>new</code>并不重要, 毕竟可以通过返回内部变量的地址来达到同样的效果</li>
+<li><code>go</code>语言的每一行不是以分号分隔的, 有一种复杂的规则来认定一行, 值得吗, 为了省一个分号</li>
+<li><code>go</code>自己判断变量是在栈上分配空间还是在堆上分配空间, 不是靠<code>new</code>来决定的, 真是增加了理解程序的难度, 和<code>c</code>语言完全不同</li>
+<li><code>go</code>语言中<code>++</code>和<code>--</code>是语句, 不可以在<code>++</code>和<code>--</code>的同时再进行赋值, 而在<code>java</code>中是允许的, <code>go</code>中这种强制行为, 感觉不灵活, 应该还是缺点更多</li>
+<li><code>go</code>的元组赋值(多变量同时赋值), 比起<code>java</code>多了一种选择</li>
+<li><code>go</code>中返回多个值的函数, 还能用说与返回值个数的变量接收, 导致和全部接收不同的结果. 简直离谱. 例如<code>map</code>的取值操作</li>
+<li><code>go</code>语言只用常量的赋值才会发生隐式类型转换吗? <code>java</code>只有数值类型的赋值和计算才会发生隐式转换, 什么是隐式转换呢?</li>
+<li><code>go</code>语言中<code>type</code>的用法是<code>type 类型名字 底层类型</code>, 与<code>c</code>语言的顺序相反, <code>type</code>就是为了给类型一个别名, 就是为了增加代码可读性吗, 还可以防止类型混用</li>
+<li>打印时的<code>%v</code>, <code>%s</code>, <code>%g</code>有什么区别, 为什么会有这么多种打印一个类型值的方式</li>
+<li><code>float64(1.0)</code>和<code>1.0</code>虽然底层类型时相同的, 但是一个是命名了, 一个是未命名. 未命名的可以用于赋值给 相同底层数据结构的变量(运算符都是支持的)</li>
+<li>直接命名基本数据类型, 还是得到运算操作, 只能说聊生于无吧</li>
+<li><code>go</code>语言中一个目录下只能有一个包, 也就是说<code>package xxx</code>, <code>xxx</code>必须相同, <code>xxx</code>还会作为别的包使用这个包时带的前缀, 同一个包中可以不带前缀. 感觉跟<code>java</code>的包还是有些不同的</li>
+<li><code>go moudle</code>语言对于包导入, 不再依赖<code>$GOPATH</code>, 那它从那里找包呢? <code>go mod</code>文件定义了一个模块名, 导入包时, 以这个模块名开头的路径, 会把不带模块头的路径作为相对路径, 从<code>go mod</code>文件所在文件夹, 开始找包. 感觉比<code>java</code>指定类路径的方式复杂了</li>
+<li><code>go</code>包的初始化, 外部变量循环依赖怎么办, 内部包级变量循环依赖怎么办? 感觉比<code>java</code>的复杂</li>
+<li>一个程序可能包含多个同名的声明, 只要它们在不同的词法域就没有关系. 这个跟<code>c</code>语言是一样的</li>
+<li><code>go</code>语言中<code>if</code>语句的判断条件中可以定义变量, 而且这个变量还可以在整个<code>if</code>和<code>else</code>语句体中使用, 是一个全新的写法, 之前没有任何一种编程语言使用过这种方式, 有增加了复杂度</li>
+<li><code>go</code>语言中包级别的变量按照依赖顺序进行解析和初始化, 局部变量只会按照执行顺序初始化</li>
+<li><code>go</code>语言的<code>main</code>函数的参数是空, 更<code>java</code>和<code>c</code>语言不一样, 如果要使用命令行参数, 就得使用<code>go</code>自带的一个库</li>
+<li><code>go</code>语句只有局部变量会检查是否被使用吗, 包级变量不会吗?</li>
+<li><code>go</code>语言把数据类型分成了四类, 基础数据类型, 复合类型, 引用类型和接口类型. 字符串为什么被归为基础数据类型呢, 它不是一个数组吗. 数组为什么是复合类型, 不是引用类型?, 指针不是一个值吗, 为什么不是基础类型呢, 接口类型不是引用类型吗? <code>go</code>的数据分类的根据是什么呢, 真是看不懂</li>
+<li><code>go</code>语言中<code>int</code>和<code>uint</code>的大小, 不仅和编译器, 还和平台有关系, 我们根本不知道它的大小, 我们该怎么使用它呢. 这是不是说明<code>go</code>编译的程序, 无法在32位和64位上同时运行, 需要同时编译, <code>uintptr</code>的大小也跟平台有关, 是不是用到了, 就得在特定的机器上编译呢? 那有点麻烦, 但是还好, 不用修改源码, 重新编译就行</li>
+<li>为什么<code>rune</code>用<code>int32</code>作为底层, <code>byte</code>用<code>int8</code>作为底层, 一个用有符号数, 一个用符号数, 明明只是一个编码, 不关注数据的正负</li>
+<li><code>go</code>语言有<code>&lt;&lt;</code>和<code>&gt;&gt;</code>, 用的是逻辑位移还是算术位移呢, <code>c</code>的呢, 反正<code>java</code>有<code>&lt;&lt;&lt;</code>和<code>&gt;&gt;&gt;</code>来做区分. <code>go</code>语言中, 在<code>x&lt;&lt;n</code>中, <code>n</code>必须是无符号数, 为什么呢, 正的有符号数不行吗? <code>go</code>语言的<code>&gt;&gt;</code>是算术左移, 但可以通过类型转换来实现首位的填充值, <code>java</code>只有有符号数所以用了两种位移来实现</li>
+<li><code>go</code>语言的<code>&amp;^</code>是啥运算符, 叫做<code>AND NOT</code>, 位清空, 有什么用呢, 别的语言都没有? 通过与, 或, 非, 应该也可以实现吧</li>
+<li><code>go</code>语言中<code>%</code>只能用于整数运算, <code>c</code>语言和<code>java</code>语言也是一样吗? 其实也不用管这些细枝末节的运算细节, 编程中几乎用不到, 通常只会将<code>%</code>用于正整数, 这时这个行为在任何编程语言中都是一致的, 不会有什么差别, 其他的细节, 记还容易记错</li>
+<li><code>go</code>语言多次<code>import</code>一个包, 这个包会被多次初始化吗? 我认为只初始化一次比较合理, 不然没办法共享变量了</li>
+<li><code>go</code>语言中<code>len</code>函数返回的是一个有符号类型, 有符号类型使逆序遍历时, 不会转换为最大的正整数而发生<code>panic</code>. 其实也对无符号数, 太容易变成最大的正整数了, 非常容易出错, 这有可能也是<code>java</code>只用有符号数的原因吧, 所以只在数值的大小没用的时候才使用无符号数, 例如位运算</li>
+<li><code>go</code>语言中, <code>rune</code>变量存的是符号的码表值, 还是经过<code>UTF-8</code>编码后的值呢? 应该是码表值. <code>java</code>中也是一样</li>
+<li><code>go</code>语言除以<code>float</code>变量的<code>0</code>值, 居然不报错, 真是离谱, 但是直接除以<code>0.0</code>又会报错, 就离谱</li>
+<li><code>go</code>语言短变量声明的默认类型为<code>int</code>和<code>float64</code></li>
+<li><code>go</code>语言<code>true</code>不会隐式转换为1, <code>false</code>也不会隐式转换为0, 反之亦然, <code>java</code>也是这样</li>
+<li><code>go</code>语言中字符串是不可变的, 跟<code>java</code>是一样的, 为什么它们都是不可变的呢? 我只能想到一个原因共享提升性能</li>
+<li><code>go</code>中字符串的<code>len</code>返回的是字节的个数, <code>java</code>中返回的字符的个数</li>
+<li>字符串中汉字的自然编码顺序等于拼音的顺序吗? 应该是不等于, 有些非常少用的汉字, 拼音靠前, 不会在65536个常用字符中, 常用字符的编码应该是很小的</li>
+<li><code>go</code>中字符串不能简单的看成字符的数组, 字符串是不可变的, 而数组是会相互影响的</li>
+<li><code>go</code>的字符串支持<code>[]</code>来取值, <code>java</code>不支持<code>[]</code>, 但有<code>charAt</code>函数</li>
+<li><code>go</code>支持`扩起来的原生字符串, <code>java</code>支持吗</li>
+<li><code>UTF-8</code>大小为<code>1</code>到<code>4</code>字节, 那对于4位的<code>unicode</code>码点, 是不是有可能放不下呢?</li>
+<li><code>go</code>语言字符串不是<code>rune</code>的数组, 直接就是<code>UTF-8</code>编码好的字节流,, 跟<code>java</code>完全不一样. 那怎么取第几个字节呢? 使用<code>utf8.DecodeRuneInString</code>来解码, 或使用<code>range</code>, <code>range</code>自动就是按字符读取的, 那我就想取第<code>i</code>个字符呢? 可以将<code>string</code>转为<code>rune</code>数组, 这丫就可以取了, 感觉<code>go</code>语言使用<code>string</code>还是好没必要, 几乎每什么用. 那要向<code>java</code>那样使用字符串, 还要利用<code>string</code>来赋值, 再转乘<code>[]rune</code>来使用, <code>rune</code>可以用字符字面量, <code>unicode</code>码点, 对于小于256的字符, 还可以使用<code>\x</code>, 好像每啥用, <code>string</code>可以字符串字面量, <code>UTF-8</code>字节序列, 和<code>unicode</code>码点序列</li>
+<li><code>go</code>语言和<code>c</code>语言都有<code>scanf</code>, 但<code>java</code>没有, 但<code>java</code>应该有从字符串提取出值的办法</li>
+<li><code>go</code>中每种常量的潜在类型都是基础类型, 那是说只要潜在类型为基础类型的, 就能是常量吗?</li>
+<li><code>go</code>中<code>const</code>和<code>type</code>都可以使用括号来同时定义多个</li>
+<li><code>go</code>中常量间的所有算术运算, 逻辑运算和比较运输的结果也是常量, 对于常量的类型转换操作或部分函数也是常数, 常数就是提升了一点可读性和性能, 好像也没有什么大作用</li>
+<li><code>go</code>中通过<code>%T</code>来打印类型, <code>java</code>可以通过打印类名</li>
+<li><code>go</code>语言常量也一些简化的赋值方式, 还有一个作用相当有限的<code>itoa</code>关键字来赋值, 感觉没有什么必要</li>
+<li><code>go</code>中字面量称为无类型常量, 无类型常量可以自己转为声明的类型, 如果没有声明类型, 就是<code>go</code>定义的规则指定的类型, 算术运算也是同理, 这跟<code>c</code>和<code>java</code>中字面量有默认的类型不同</li>
+<li>零大小的数组有什么用? 零大小的接口和数据结构对于go语言好像有bug</li>
+<li><code>go</code>中<code>var a [3]int</code>和<code>var b [4]int</code>, <code>a</code>和<code>b</code>是不同类型, 不能相互赋值, 在<code>c</code>语言中也是一样. 但在<code>java</code>中长度不会导致数组类型不一样, 而且定义数组变量时, 也没有指定长度. <code>java</code>中数组怎么初始化的呢? 会有默认值吗</li>
+<li><code>go</code>语言中数组的相等判断非常奇怪, 只有数据类型, 长度, 且数据类型能比较的情况下, 数组才能比较, 否则会报错. 当数据长度, 且数据值相等时, 才相等. 能比较的数据结构, 不是只有基础数据结构, 结构体支持吗</li>
+<li><code>go</code>语言传递数组时, 是会挨个复制数组值的, 这个跟<code>c</code>和<code>java</code>都是不一样的. 可以说是多了一种防止修改数组的方式</li>
+<li><code>go</code>对指向数组的指针是可以直接便利的, <code>ptr[i]</code>和<code>(*ptr)[i]</code>的效果是一样的, 在<code>range</code>中<code>ptr</code>和<code>(*ptr)</code>也是一样的, 这很离谱</li>
+<li><code>go</code>语言数组和<code>slice</code>的语法很难区分, 只有定义的时候, <code>slice</code>的<code>[]</code>不写值, 而数组是需要指定大小或者<code>...</code>. <code>len</code>和<code>cap</code>既可以运用于数组, 也可以用于<code>slice</code>. <code>s[i:j]</code>切片操作中<code>j</code>可以超过<code>len</code>, 但不能超过<code>cap</code>, 真的无语, 切片操作可以用在数组和<code>slice</code>上, 切出来是<code>slice</code></li>
+<li><code>go</code>语言的<code>slice</code>不支持比较, <code>java</code>的是支持的, <code>go</code>语言面向对象的特性太差了. 是怕<code>slice</code>自己引用自己吗, <code>java</code>不也有这种问题吗, 那为什么<code>java</code>可以比较. </li>
+<li>不要用可变类型作为<code>map</code>的<code>key</code>, 无论是<code>go</code>还是<code>java</code>, <code>key</code>如果变了, <code>hash没变</code>会导致位置不变, 如果引用了同一个<code>key</code>, 会导致判断不出<code>key</code>已经存在, 或者相等. 放入<code>map</code>后, <code>key</code>的<code>hash</code>值应该是不会在变了, 不然还要<code>watch</code>, <code>key</code>的值变没有, 太消耗性能了, 这只是一个推测还没有自我验证过.</li>
+<li>这本书说了两个理由, 都无法说明<code>go</code>的<code>slice</code>为啥不能比较, 吐了</li>
+<li><code>slice</code>只能和<code>nil</code>比较, 可以用<code>[]int(nil)</code>或<code>nil</code>来赋值给以<code>slice</code>变量, <code>nil</code>可以赋值给指针和引用类型, 接口类型算引用类型吗, 结构体可以用<code>nil</code>赋值吗</li>
+<li><code>go</code>中<code>len</code>和<code>cap</code>为0的<code>slice</code>, 就可以为<code>nil</code>, 也可以不为<code>nil</code>. 为<code>nil</code>的<code>sclie</code>底层没有引用数组,  <code>go</code>中<code>nil</code>有什么用呢???</li>
+<li><code>go</code>的<code>printf</code>怎么用的, 数组怎么打印, 类型怎么打印</li>
+<li><code>go</code>语言中<code>copy</code>函数就只能用于数组的复制吗? 能使用的范围太小了吧,<code>append</code>也只能用于<code>slice</code>吗</li>
+<li><code>go</code>语言中<code>var x, y []int</code>可以声明多个<code>slice</code>, 那声明多个指针呢? 指针能<code>var x, y *int</code>这么写吗</li>
+<li><code>go</code>语言支持可变参数, <code>java</code>支持吗? 可变参数可以用<code>slice</code>来实现, 那直接用<code>slice</code>来传参数不行吗, 就为了调用函数时写起来好看吗</li>
+<li>go程序设计语言没有教<code>delete</code>的用法, 无语, 增删改查, 不应该是最重要的吗, <code>go</code>中数组删除是自己用分片来实现吗? <code>delete</code>是用来删除<code>map</code>中的元素的</li>
+<li><code>go</code>语言中<code>cap</code>有必要让<code>go</code>语言使用者感知到吗? 真不知道有什么用, <code>java</code>是没有让使用者感知到的</li>
+<li><code>go</code>的<code>map</code>中<code>key</code>必须是支持<code>==</code>的, 可是<code>go</code>中结构体支持<code>==</code>吗, 我认为应该必须得支持, 不然<code>map</code>也太鸡肋了, 确认了, 结构体是支持<code>==</code></li>
+<li><code>go</code>中在<code>map</code>中取值时, 如果<code>key</code>不存在, 返回的是零值, 其实也只能这样, 总不能报错吧</li>
+<li><code>go</code>中不能对<code>map</code>中的<code>value</code>取地址, <code>value</code>是会移动, 地址可能会随时失效. 地址的抽象程度太低了, 很容易受别的因素变化</li>
+<li><code>go</code>语言中<code>map</code>的零值是<code>nil</code>, 这时<code>map</code>没有引用任何哈希表, <code>nil</code>的<code>slice</code>和空的<code>slice</code>几乎没有差别, <code>nil</code>的<code>map</code>无法添加值, 毕竟<code>append</code>函数是有能力自己创建新<code>slice</code>的</li>
+<li><code>go</code>语言中<code>map</code>是无法比较的, 除了和<code>nil</code>, 这个是和<code>slice</code>是一致的. <code>java</code>中<code>List</code>和<code>Map</code>是能比较的吗</li>
+<li><code>go</code>语言中<code>len</code>函数可以运用于<code>map</code></li>
+<li><code>go</code>中0个值的聚合体有什么用呢? </li>
+<li><code>go</code>语言中点操作符可以用于指向结构体的指针, 这是什么骚操作, 直接用<code>-&gt;</code>不好吗, 这样很容易把结构体和结构体指针弄混, <code>go</code>语言中指针是不能用<code>-&gt;</code>, 好像都没有这个操作符.</li>
+<li><code>go</code>中调用函数返回的是值, 并不是一个可取地址的变量. 头一次在编程语言中听说这种说法. <code>c</code>语言会有这种问题吗? 应该会有吧, 没有验证过</li>
+<li><code>go</code>中定义结构体时, 成员的顺序不同, 会导致定义的结构体不同, 那这种不同体现在哪里呢? 不是有类型名称来做区分了吗? 简直无法理解</li>
+<li><code>go</code>语言中结构体的导出, 也是根据首字母的大小写来判断的, 导出能在包外访问, 没有导出的, 只能在包内访问</li>
+<li><code>go</code>语言中一个命名为S的结构体类型不能再包含S类型的成员. 但是S类型的结构体可以包含<code>*S</code>指针类型的成员, <code>c</code>和<code>java</code>是怎样的呢</li>
+<li><code>go</code>中为什么结构体字面量可以取地址, 而整数不行? 看不懂看不懂</li>
+<li><code>go</code>语言中结构体的比较, 限制好大, 而且非常不灵活. <code>go</code>要求结构体的所有成员都必须可以比较, 而且必须全部相等, 这比<code>java</code>差太多了</li>
+<li><code>go</code>的匿名成员机制, 也没有啥用呀, 就是为了使用成员时不用写出中间的成员. 如果有多个相同类型的成员呢? 而且结构体的命名还会影响导出, 又是一个鸡肋的东西. 唯一的用处可以获得匿名成员的方法, 其实可以把匿名成员当成继承来用</li>
+<li>编程语言中第一类值或第一公民, 指的是能被赋值, 拥有类型的类型, <code>go</code>中函数是有类型的, <code>c</code>也是, <code>java</code>中函数只能放在<code>class</code>中, 不能被赋值啥的</li>
+<li><code>go</code>中函数值的零值是<code>nil</code>, 当调用<code>nil</code>时会发生<code>panic</code>, 同时函数值是不能比较的, 只能和<code>nil</code>比较. 那是不是<code>go</code>中每种类型都要记一下能不能比较呢, 感觉容易出现混乱. 现在不能比较的是<code>slice</code>, <code>map</code>, 函数</li>
+<li>匿名函数可以访问外部函数的变量, 有点像<code>java</code>的匿名类, 当访问外部变量这种用法, 还是有些高级, 不知到该用在什么地方, 不用这种高级用法, 用传参数可以吗</li>
+<li>闭包是什么意思, <code>go</code>中函数值也被称为闭包, 闭包是一种很底层的概念了吧</li>
+<li><code>go</code>程序设计语言举的例子都不简单, 真的垃圾</li>
+<li><code>go</code>中函数值使用外部的变量的时, 非常容易出现<code>bug</code>, 使用所有值都是地址, 又是一个坑呀</li>
+<li><code>go</code>中<code>Printf</code>是可变参数吗, 为什么它可以任意类型呢? 自己可变参数只能是同一类型的, <code>Printf</code>用的是<code>interface&#123;&#125;</code>类型, 这个类型有点像<code>java</code>中的<code>object</code></li>
+<li>可变参数可以用<code>slice</code>来实现, 那多一种语法其实也没有什么必要, 可以看作是一种语法糖</li>
+<li><code>go</code>语言中<code>defer</code>的作用跟<code>finally</code>差不多, 但是使用的位置是不同的, 同时<code>defer</code>调用的顺序是相反的. <code>defer</code>有一个很独特的操作<code>func ()()</code>, 它只会在函数结束后调用最后一个函数, 前面的函数会在使用<code>defer</code>的地方被调用. 这就实现了, 使用前调用和使用后调用的结果, 很像<code>aop</code>, <code>defer</code>能实现的东西<code>finally</code>也能实现, 但是<code>defer</code>的写法更好看一些</li>
+<li>什么是异常呢? 就是调用者本应该遵守规则去使用某个函数, 但使用时却违反规则去使用. 什么时候使用<code>err</code>, 调用者遵守了规则, 但是实现者发现因为某种原因, 无法给出正确的结果. 说到底, 就是谁负责. </li>
+<li><code>go</code>中结构体的成员和方法共用一个命名空间, 就是成员和方法的名称不能相同. <code>java</code>中成员方法应该是可以同名的吧</li>
+<li><code>go</code>中方法可以被声明到任意类型, 只要不是一个指针或者一个<code>interface</code>, <code>interface</code>不能有方法我能理解, 毕竟自己定义时已经写了, 为什么指针也不能有方法呢? 不明白, 也许设计如此吧</li>
+<li><code>go</code>中调用方法是不是有两种方式, 一种是对象<code>.</code>语法, 另一种是函数类似的调用, 用第一参数作为对象, 应该是有两种的. 为什么有两种呢? 第一种是第二种的语法糖, 这是我认为的, 其实也是非常合理的</li>
+<li><code>go</code>语言中指针可以调用类型的方法, 类型也可以调用指针的方法前提是它是变量, 不是字面量, 那为什么地址字面量可以调用类型的方法呢? 到底什么是字面量啊), 这当中<code>go</code>会存在隐式转换, 语法糖太多了, 让初学者很困惑, 垃圾. 如果指针和类型, 都声明了同名称方法, 这样会有什么后果, 或者这样是在同一个命名中的. 应该是在同一个命名空间中的吧. 验证出来, 是在同一个命名空间中的, 这样挺合理, 不然就太混乱了 </li>
+<li><code>go</code>语言允许类型的<code>nil</code>来调用方法, 跟<code>java</code>不一样, <code>java</code>会报空指针异常的</li>
+<li><code>go</code>中结构体除了能内嵌类型, 还能内嵌指针, 内嵌指针有什么用呢? 其实没有什么区别, 除了利用指针可以共享同一个对象.</li>
+<li><code>go</code>中除了匿名函数, 还有匿名结构, 但是匿名结构没有地方也方法, 不像<code>java</code>匿名类可以在块中写方法. 但是<code>go</code>匿名结构中匿名成员能带来一些方法, 算是一种有效的弥补手段吧. 匿名函数和匿名结构, 一般什么时候会用呢? 一个函数或结构只会被用一次时, 可以懒得取方法, 还是非常有用的, 取名字可太麻烦了</li>
+<li><code>go</code>中接口是隐式实现的, <code>java</code>中需要自己写明, 这两个有什么区别呢? 隐式可以让旧的类实现新实现的方, 但是<code>java</code>可以用适配器模式来实现, 说到底, 其实也没有啥区别是吗? 就是稍微方便点</li>
+<li>面向接口编程是指导思想, <code>LSP</code>是面向接口编程的实现的要求和规则</li>
+<li><code>go</code>中<code>for</code>循环对于<code>string</code>有特殊的操作, <code>slice</code>和<code>string</code>也有特殊操作, <code>[]byte(&quot;霄剑&quot;)</code>可以直接变成<code>UTF8</code>编码的字节<code>slice</code></li>
+<li><code>go</code>中结构体和接口都有内嵌语法, 还有别的类型有这种语法吗? </li>
+<li><code>go</code>值接收器和指针接收器有很多不同的, 太坑了. 既然值接收器会生成一个指针接收器的方法, 那为啥用指针类型调用方法时, 还要编译器来解引用呢? 不是已经生成了指针接收器的方法了吗? 搞不懂</li>
+<li><code>go</code>语言中匿名结构体可以有相同名称的方法, 例如<code>String</code>方法, 如果有两个匿名结构体都有<code>String</code>方法, 编译会报错, 这个有点像多继承带来的问题</li>
+<li><code>go</code>语言结构体字面量可以取地址, <code>c</code>语言不行, 我认为这应该又是<code>go</code>语言的语法糖</li>
+<li><code>go</code>中接口是可以比较的, 但是接口的动态类型不能比较的话, 会报<code>panic</code>, 还有一个问题, 接口比较有什么用呢? 这又是什么骚操作</li>
+<li><code>go</code>中实现排序需要实现三个方法, <code>java</code>中只需要实现一个方法, <code>c</code>语言中是怎么实现的呢? </li>
+<li><code>go</code>中类型断言和转型的语法很像. <code>x.(T)</code>和<code>T(x)</code>, 真的像. 类型断言中<code>x</code>只能是接口, <code>T</code>可以是接口或者类型. 当<code>x</code>为<code>nil</code>时, 会报<code>panic</code>. 类型断言是反多态的, 在<code>java</code>中是非常不值得推荐的. <code>go</code>却非常推荐, 我觉得应该时不值得推荐的, 毕竟违反了多态,当然特例情况也是存在的, 具体类型有更好解决方案时, 可以使用断言</li>
+<li>子类型多态和非参数多态(可识别联合), 子类型多态是抽象, 隐藏细节, 而非参数多态是将接口强制转成特定类型, 那在<code>java</code>中是不是把<code>object</code>接收值再转成各种类型, 只能说很像, 这种做法面向对象不是不提倡吗? 也不是面向对象编程的使用接口的目的, 真是各种用法都有, 只要有用就行. 这种用法在<code>go</code>语言中有一种语法来支持, 叫类型开关, <code>x.(type)</code>, <code>java</code>中有类似的语法吗? </li>
+<li>类型开关在单一类型的<code>case</code>内部, 才会进行类型转换, 在其他情况下都是没有转换之前的值. 行为挺奇怪的</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+      <div>
+  <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+</div>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Go/" rel="tag"><i class="fa fa-tag"></i> Go</a>
+              <a href="/tags/%E9%97%AE%E9%A2%98/" rel="tag"><i class="fa fa-tag"></i> 问题</a>
+          </div>
+	  <script type="text/javascript">
+            var tagsall=document.getElementsByClassName("post-tags")
+            for (var i = tagsall.length - 1; i >= 0; i--){
+                var tags=tagsall[i].getElementsByTagName("a");
+                for (var j = tags.length - 1; j >= 0; j--) {
+                    var golden_ratio = 0.618033988749895;
+                    var s = 0.5;
+                    var v = 0.999;
+                    var h = golden_ratio + Math.random()*0.8 - 0.5;
+                    var h_i = parseInt(h * 6);
+                    var f = h * 6 - h_i;
+                    var p = v * (1 - s);
+                    var q = v * (1 - f * s);
+                    var t = v * (1 - (1 - f) * s);
+                    var r, g, b;
+                    switch (h_i) {
+                        case 0:
+                            r = v;
+                            g = t;
+                            b = p;
+                            break;
+                        case 1:
+                            r = q;
+                            g = v;
+                            b = p;
+                            break;
+                        case 2:
+                            r = p;
+                            g = v;
+                            b = t;
+                            break;
+                        case 3 :
+                            r = p;
+                            g = q;
+                            b = v;
+                            break;
+                        case 4:
+                            r = t;
+                            g = p;
+                            b = v;
+                            break;
+                        case 5:
+                            r = v;
+                            g = p;
+                            b = q;
+                            break;
+                        default:
+                            r = 1;
+                            g = 1;
+                            b = 1;
+                      }
+                    tags[j].style.background = "rgba("+parseInt(r*255)+","+parseInt(g*255)+","+parseInt(b*255)+","+0.5+")";
+                }
+            }
+            </script>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/01/28/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BE%8E/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" rel="prev" title="单例设计模式">
+                  <i class="fa fa-chevron-left"></i> 单例设计模式
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/07/20/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/Maven/maven%E4%BD%BF%E7%94%A8/" rel="next" title="maven使用">
+                  maven使用 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-leaf"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">霄剑</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">71k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">4:19</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/55OX5XO55" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,195 @@
+/*主页文章添加阴影效果*/
+.post {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 25px;
+  -webkit-box-shadow: 0 0 5px rgba(202,203,203,0.5);
+  -moz-box-shadow: 0 0 5px rgba(202,203,204,0.5);
+mobile()
+}
+/*鼠标样式*/
+* {
+  cursor: url("/images/default.cur"), auto;
+}
+:active {
+  cursor: url("/images/pointer.cur"), auto;
+}
+:link {
+  cursor: url("/images/pointer.cur"), auto;
+}
+a,
+span.exturl {
+  cursor: url("/images/pointer.cur"), auto;
+}
+.posts-expand .post-meta time {
+  cursor: url("/images/pointer.cur"), auto;
+}
+/*所选文字颜色*/
+::selection {
+  background: #59ff83;
+  color: #555;
+}
+/*设置返回顶端按钮*/
+.back-to-top.back-to-top-on {
+  margin-right: 8px;
+  bottom: 500px;
+mobile()
+}
+/* 阅读更多按钮 start */
+.post-body .post-button .btn:hover {
+  background: #b2acf3;
+}
+/* 阅读更多按钮 end */
+/* 归档页样式 began */
+.posts-collapse .post-block .post-content .collection-title {
+  font-size: 22px;
+  border-bottom: 2px solid #49b1f5;
+  padding-right: 10px;
+  color: #49b1f5;
+mobile()
+}
+.posts-collapse .post-content .post-header {
+  border-bottom: 0;
+  margin: 10px;
+  margin-left: 2px;
+}
+.posts-collapse .post-content .collection-year {
+  margin: 20px 0;
+}
+.posts-collapse a.post-title-link {
+  display: inline-block;
+  width: 80%;
+}
+.posts-collapse .post-content .post-header::before {
+  top: 0.95em;
+}
+.posts-collapse a.post-title-link:before {
+  top: 10px;
+  width: 18px;
+  height: 18px;
+  content: "📚";
+  margin-right: 5px;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: 25px;
+  line-height: 32px;
+}
+.posts-collapse .post-content article:hover {
+  box-shadow: 10px 10px 15px 2px rgba(0,0,0,0.12), 0 0 6px 0 rgba(104,104,105,0.1);
+  border-radius: 15px;
+  margin-left: 25px;
+}
+.posts-collapse .post-meta-container time {
+  top: 0.4em;
+  font-size: 11px;
+  line-height: 32px;
+  position: absolute;
+  color: #fff;
+  background-color: #49b1f5;
+  border-radius: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-left: 15px;
+}
+.posts-collapse a.post-title-link {
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 400;
+mobile()
+}
+.post-title {
+  display: block;
+  margin-left: 4.5rem;
+  color: #4c4948;
+  text-decoration: none;
+  font-size: 0.8rem;
+  cursor: pointer;
+mobile()
+}
+/* 归档页样式 end */
+.tag-cloud-tags {
+  text-align: center;
+  counter-reset: tags;
+}
+.tag-cloud-tags a {
+  display: inline-block;
+  border: 0px;
+  border-radius: 10px;
+  padding: 0px 10px;
+  margin: 8px;
+  color: rgba(34,34,34,0.8);
+}
+/* 文字前添加相应的符号，content后的Unicode可以自定义*/
+.tag-cloud-tags a:before {
+  font-family: 'Font Awesome 5 Free';
+  content: "\f02b";
+  font-weight: 900;
+}
+.tag-cloud-tags a span:before {
+  font-family: 'Font Awesome 5 Free';
+  content: "  \f00d  ";
+  font-weight: 900;
+  color: #49b1f5;
+}
+.tag-cloud-tags a:hover {
+  box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.4);
+  transform: scale(1.1);
+  transition-duration: 0.15s;
+}
+.tag-cloud-title {
+  font-size: 22px;
+  border-bottom: 2px solid #49b1f5;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #49b1f5;
+mobile()
+}
+/* 文章底部彩色标签样式 */
+.posts-expand .post-tags a {
+  display: inline-block;
+  font-size: 1em;
+  padding: 0px 10px;
+  border-radius: 8px;
+  color: #555;
+  border: 0px;
+}
+/* 标签页样式 end */
+.posts-expand .post-block .post-header {
+  margin-bottom: 10px;
+}
+.category-all-title {
+  font-size: 22px;
+  border-bottom: 2px solid #49b1f5;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #49b1f5;
+mobile()
+}
+.category-all-page .category-list {
+  list-style: circle;
+}
+.category-all-page li.category-list-item:hover {
+  list-style: disc;
+}
+.category-all-page ul {
+  list-style-type: circle;
+}
+.category-all a:not(.btn):not(.hexo-douban-button):not(.hexo-douban-tab) {
+  color: #5073b8;
+  border-bottom: none;
+  text-decoration: none;
+}
+.category-all a:not(.btn):not(.hexo-douban-button):not(.hexo-douban-tab):hover {
+  border-bottom: 2px solid #5073b8;
+}
+.category-all-page .category-list-count::before {
+  content: ' ( ';
+}
+.category-all-page .category-list-count::after {
+  content: ' ) ';
+}
+.post .post-body {
+  font-size: 1em;
+}
+.search-popup .search-result-list {
+  width: calc(100% - 10px);
+}
