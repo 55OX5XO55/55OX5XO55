@@ -26,7 +26,7 @@
 <meta property="og:description" content="Go语言入门">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-17T15:39:43.000Z">
-<meta property="article:modified_time" content="2024-07-23T16:06:07.340Z">
+<meta property="article:modified_time" content="2024-07-24T15:10:25.185Z">
 <meta property="article:author" content="霄剑">
 <meta property="article:tag" content="Go">
 <meta property="article:tag" content="Go程序设计语言">
@@ -143,7 +143,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%A5%E9%97%A8"><span class="nav-number">1.</span> <span class="nav-text">入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#go%E8%AF%AD%E8%A8%80%E4%BE%9D%E8%B5%96%E5%8C%85%E6%9F%A5%E6%89%BE%E6%9C%BA%E5%88%B6"><span class="nav-number">1.1.</span> <span class="nav-text">go语言依赖包查找机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#go%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">1.2.</span> <span class="nav-text">go环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Go%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="nav-number">1.3.</span> <span class="nav-text">Go的命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hello-World"><span class="nav-number">1.4.</span> <span class="nav-text">Hello, World</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E9%87%8D%E5%A4%8D%E7%9A%84%E8%A1%8C"><span class="nav-number">1.5.</span> <span class="nav-text">查找重复的行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GIF%E5%8A%A8%E7%94%BB"><span class="nav-number">1.6.</span> <span class="nav-text">GIF动画</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E8%8E%B7%E5%BE%97%E5%A4%9A%E4%B8%AAURL"><span class="nav-number">1.7.</span> <span class="nav-text">并发获得多个URL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.8.</span> <span class="nav-text">Web服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E7%AB%A0%E8%A6%81%E7%82%B9"><span class="nav-number">1.9.</span> <span class="nav-text">本章要点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">常用的函数</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%A5%E9%97%A8"><span class="nav-number">1.</span> <span class="nav-text">入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#go%E8%AF%AD%E8%A8%80%E4%BE%9D%E8%B5%96%E5%8C%85%E6%9F%A5%E6%89%BE%E6%9C%BA%E5%88%B6"><span class="nav-number">1.1.</span> <span class="nav-text">go语言依赖包查找机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#go%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">1.2.</span> <span class="nav-text">go环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Go%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="nav-number">1.3.</span> <span class="nav-text">Go的命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">命令行参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#go%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%BE%AA%E7%8E%AF"><span class="nav-number">2.0.1.</span> <span class="nav-text">go语言中循环</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hello-World"><span class="nav-number">2.1.</span> <span class="nav-text">Hello, World</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E9%87%8D%E5%A4%8D%E7%9A%84%E8%A1%8C"><span class="nav-number">2.2.</span> <span class="nav-text">查找重复的行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GIF%E5%8A%A8%E7%94%BB"><span class="nav-number">2.3.</span> <span class="nav-text">GIF动画</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E8%8E%B7%E5%BE%97%E5%A4%9A%E4%B8%AAURL"><span class="nav-number">2.4.</span> <span class="nav-text">并发获得多个URL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web%E6%9C%8D%E5%8A%A1"><span class="nav-number">2.5.</span> <span class="nav-text">Web服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E7%AB%A0%E8%A6%81%E7%82%B9"><span class="nav-number">2.6.</span> <span class="nav-text">本章要点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E5%87%BD%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">常用的函数</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -240,7 +240,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-07-24 00:06:07" itemprop="dateModified" datetime="2024-07-24T00:06:07+08:00">2024-07-24</time>
+      <time title="修改时间：2024-07-24 23:10:25" itemprop="dateModified" datetime="2024-07-24T23:10:25+08:00">2024-07-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -263,14 +263,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.5k</span>
+      <span>2.8k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>9 分钟</span>
+      <span>10 分钟</span>
     </span>
 </div>
 
@@ -303,6 +303,17 @@
 <h2 id="Go的命令"><a href="#Go的命令" class="headerlink" title="Go的命令"></a><code>Go</code>的命令</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">编译, 并运行, 运行完成后, 可执行文件会被删除</span></span><br><span class="line">go run helloworld.go</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">编译成可运行的二进制文件, 会放在当前目录下, 只对main包有效, 对于非main包, 没有出错, 也没有效果</span></span><br><span class="line">go build helloworld.go</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">下载依赖</span></span><br><span class="line">go get 包地址</span><br></pre></td></tr></table></figure>
 
 <p><code>Go</code>语言的命令可能和网上的说明差异很大, 准确的描述, 只能看<code>go help</code></p>
+<h1 id="命令行参数"><a href="#命令行参数" class="headerlink" title="命令行参数"></a>命令行参数</h1><p><code>os.Args</code>是一个<code>slice</code>, 其中<code>os.Args[0]</code>是<code>go</code>程序本身的名字</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">	&quot;os&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	var s, sep string</span><br><span class="line">	for i := 1; i &lt; len(os.Args); i++ &#123;</span><br><span class="line">		s += sep + os.Args[i]</span><br><span class="line">		sep = &quot; &quot;</span><br><span class="line">	&#125;	</span><br><span class="line">	fmt.Println(s)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>go</code>语言中变量的声明有4种方式</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">由于string可以省略, 很少使用这种方式</span></span><br><span class="line">var s string = &quot;caicai&quot;</span><br><span class="line">var s = &quot;caicai&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">java局部中变量不会有初始化, 如果直接使用, 会报没有初始化, 成员变量和静态变量才会初始化, 默认为零值, go语言中, 任何地方都会初始化为相应类型的零值</span></span><br><span class="line">var s string</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">只能用于局部变量的声明</span></span><br><span class="line">s := &quot;caicai&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">多变量声明, 可读性不好, 不建议使用</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">go很重的也发</span></span><br><span class="line">var s, sep string</span><br><span class="line">var s, sep = &quot;caicai&quot;, &quot; &quot;</span><br><span class="line">s, sep = &quot;&quot;, &quot;&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">java中的写法</span></span><br><span class="line">String s, sep;</span><br><span class="line">String s = &quot;caicai&quot;, sep = &quot; &quot;;</span><br></pre></td></tr></table></figure>
+
+<p><code>go</code>语言中<code>++</code>和<code>--</code>是语句, 不是表达式, 不支持<code>j = i++</code>, 但在<code>java</code>中, <code>++</code>和<code>--</code>是语句, 支持<code>j = i++;</code></p>
+<h3 id="go语言中循环"><a href="#go语言中循环" class="headerlink" title="go语言中循环"></a>go语言中循环</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="keyword">while</span>循环</span></span><br><span class="line">for condition &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">无尽循环</span></span><br><span class="line">for &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">普通<span class="keyword">for</span>循环</span></span><br><span class="line">for initialization; condition; post &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">range循环, 有点像java的foreach循环, 但是go中可以有index</span></span><br><span class="line">for index, value := range slice &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello, World"></a>Hello, World</h2><p>注释以<code>//</code>开头. 习惯上, 在一个包声明前, 使用注释对其进行描述; 对于<code>main</code>包, 注释是一个或多个完整的句子, 用来对这个程序进行整体概括.</p>
 <p><code>var</code>关键字用于声明变量. 变量可以在声明的时候初始化. 如果变量没有明确地初始化, 它将隐式地初始化为这个类型的空值. </p>
 <p>符号<code>:=</code>是短变量声明的一部分, 这是定义一个或多个变量并根据它们的初始值为这些变量赋予适当类型的语句. </p>
@@ -457,14 +468,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">71k</span>
+    <span title="站点总字数">72k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">4:20</span>
+    <span title="站点阅读时长">4:21</span>
   </span>
 </div>
 
